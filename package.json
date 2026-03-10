@@ -17,10 +17,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "update:contracts": "npm install @deepvoicerut/contracts@latest"
   },
   "dependencies": {
-    "@deepvoicerut/contracts": "file:../contracts",
+    "@deepvoicerut/contracts": "^1.0.25",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",

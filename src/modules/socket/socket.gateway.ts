@@ -5,9 +5,8 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { SocketService } from './socket.service';
-import { Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
-import { EmitToUserRequest } from '@deepvoicerut/contracts/gen/realtime';
 
 @WebSocketGateway({ path: '/socket' })
 export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
