@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: build
+        run: docker build . -t sergeyvolro/realtime-service
+
+      - name: publish image
+        run: |
+          docker login -u sergeyvolro -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push sergeyvolro/realtime-service
+
+      - name: update deployment with image digest
+        run: |
+          IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' sergeyvolro/realtime-service)
+          echo "Using image: $IMAGE_DIGEST"
+
+          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+
+          KUBECONFIG=kubeconfig.yaml kubectl set image deployment/realtime-service realtime-service=$IMAGE_DIGEST -n deep-voice
+
+          rm kubeconfig.yaml
