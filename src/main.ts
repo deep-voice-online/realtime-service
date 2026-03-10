@@ -16,7 +16,7 @@ async function bootstrap() {
   app.connectMicroservice<RmqOptions>({
     transport: Transport.RMQ,
     options: {
-      queue: 'transcribe_queue',
+      queue: 'realtime_queue',
       urls: [
         config.getOrThrow<string>(
           'RABBITMQ_URL',
