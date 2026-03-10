@@ -8,7 +8,7 @@ import { SocketService } from './socket.service';
 import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway({ path: '/socket' })
+@WebSocketGateway({ path: '/' })
 export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private readonly logger: Logger;
 
